@@ -33,6 +33,7 @@ namespace PracticeExercise1
             }
 
             array[count++] = i;
+            count++;
         }
 
         private void Resize()
@@ -88,7 +89,7 @@ namespace PracticeExercise1
 
             ShiftRight(0);
             array[0] = i;
-
+            count++;
         }
 
         private void ShiftRight(int startingIndex)
@@ -105,9 +106,17 @@ namespace PracticeExercise1
         }
 
         // TODO
-        private void ShiftLeft(int startingIndex)
+        private void ShiftLeft(int endingIndex)
         {
-            
+            if (count == array.Length)
+            {
+                Resize();
+            }
+
+            for (int i = count; i < endingIndex; i++)
+            {
+                array[i - 1] = array[i];
+            }
         }
 
         public override string ToString()
