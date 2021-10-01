@@ -1,7 +1,7 @@
 ﻿using System;
 namespace PracticeExercise1
 {
-    public class ArrayList: IList
+    public class ArrayList : IList
     {
         private int[] array = null;
         private int count = 0;
@@ -19,11 +19,31 @@ namespace PracticeExercise1
         {
             get
             {
-                return 0;
+                if (IsEmpty == false)
+                {
+                    return array[0];
+                }
+                else
+                {
+                    return -1;
+                }
             }
         }
 
-        public int Last => throw new NotImplementedException();
+        public int Last
+        {
+            get
+            {
+                if (IsEmpty == false)
+                {
+                    return array[count];
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+        }
 
         public void Append(int i)
         {
@@ -32,7 +52,7 @@ namespace PracticeExercise1
                 Resize();
             }
 
-            array[count++] = i;
+            array[count] = i;
             count++;
         }
 
@@ -50,7 +70,7 @@ namespace PracticeExercise1
 
             int indexOfExistingValue = FirstIndexOf(existingValue);
 
-            if( indexOfExistingValue == -1)
+            if (indexOfExistingValue == -1)
             {
                 Append(newValue);
             }
@@ -64,6 +84,33 @@ namespace PracticeExercise1
                 count++;
             }
 
+        }
+
+        public void InsertAt(int newValue, int index)
+        {
+            if (count == array.Length)
+            {
+                Resize();
+            }
+
+            ShiftRight(index);
+            array[index] = newValue;
+            count++;
+        }
+
+        public void Remove(int value)
+        {
+            int indexOfValue = FirstIndexOf(value);
+            ShiftLeft(indexOfValue);
+            array[indexOfValue] = -1;
+            count--;
+        }
+
+        public void RemoveAt(int index)
+        {
+            ShiftLeft(index);
+            array[index] = -1;
+            count--;
         }
 
         public int FirstIndexOf(int existingValue)
@@ -99,7 +146,7 @@ namespace PracticeExercise1
                 Resize();
             }
 
-            for (int i=count; i>startingIndex; i--)
+            for (int i = count; i > startingIndex; i--)
             {
                 array[i] = array[i - 1];
             }
@@ -113,7 +160,7 @@ namespace PracticeExercise1
                 Resize();
             }
 
-            for (int i = count; i < endingIndex; i++)
+            for (int i = endingIndex + 1; i <= count; i++)
             {
                 array[i - 1] = array[i];
             }
@@ -134,20 +181,6 @@ namespace PracticeExercise1
 
         }
 
-        public void InsertAt(int newValue, int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Clear()
         {
@@ -157,7 +190,17 @@ namespace PracticeExercise1
         public IList Reverse()
         {
             var reversedList = new ArrayList();
-
+                //new int[count];
+            int holder = count;
+            for (int i = 0; i < count; i++)
+            {
+                if (reversedList.count == reversedList.array.Length)
+                {
+                    Array.Resize(ref reversedList.array, reversedList.array.Length * 2);
+                }
+                reversedList.array[holder] = array[i];
+                count--;
+            }
             return reversedList;
         }
     }
