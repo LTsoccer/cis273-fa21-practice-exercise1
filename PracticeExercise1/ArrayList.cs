@@ -19,11 +19,11 @@ namespace PracticeExercise1
         {
             get
             {
-                return 0;
+                return array[0];
             }
         }
 
-        public int Last => throw new NotImplementedException();
+        public int Last => array[count-1];
 
         public void Append(int i)
         {
@@ -56,10 +56,10 @@ namespace PracticeExercise1
             else
             {
                 // shift everything from that index to the right
-                ShiftRight(indexOfExistingValue);
+                ShiftRight(indexOfExistingValue+1);
 
                 // add new value at that index
-                array[indexOfExistingValue] = newValue;
+                array[indexOfExistingValue+1] = newValue;
                 count++;
             }
 
@@ -88,6 +88,7 @@ namespace PracticeExercise1
 
             ShiftRight(0);
             array[0] = i;
+            count++;
 
         }
 
