@@ -240,7 +240,7 @@ namespace UnitTests
 
             Assert.AreEqual(0, list.FirstIndexOf(0));
             Assert.AreEqual(4, list.FirstIndexOf(4));
-            Assert.AreEqual(10, list.FirstIndexOf(10));
+            Assert.AreEqual(15, list.FirstIndexOf(10));
         }
 
         [TestMethod]
