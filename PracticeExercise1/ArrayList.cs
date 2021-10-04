@@ -36,7 +36,7 @@ namespace PracticeExercise1
             {
                 if (IsEmpty == false)
                 {
-                    return array[count];
+                    return array[count-1];
                 }
                 else
                 {
@@ -44,6 +44,7 @@ namespace PracticeExercise1
                 }
             }
         }
+
 
         public void Append(int i)
         {
@@ -77,10 +78,10 @@ namespace PracticeExercise1
             else
             {
                 // shift everything from that index to the right
-                ShiftRight(indexOfExistingValue);
+                ShiftRight(indexOfExistingValue+1);
 
                 // add new value at that index
-                array[indexOfExistingValue] = newValue;
+                array[indexOfExistingValue+1] = newValue;
                 count++;
             }
 
