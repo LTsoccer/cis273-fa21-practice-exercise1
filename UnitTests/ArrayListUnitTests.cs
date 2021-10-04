@@ -266,11 +266,11 @@ namespace UnitTests
             {
                 list.Append(i);
             }
-            Assert.AreEqual("[1,2,3,1,2,3,4,5,6,7,8,9]", list.ToString().Replace(" ", ""));
+            Assert.AreEqual("[1,2,3,0,1,2,3,4,5,6,7,8,9]", list.ToString().Replace(" ", ""));
 
             list.Remove(1);
             list.Remove(1);
-            Assert.AreEqual("[2,3,2,3,4,5,6,7,8,9]", list.ToString().Replace(" ", ""));
+            Assert.AreEqual("[2,3,0,2,3,4,5,6,7,8,9]", list.ToString().Replace(" ", ""));
 
 
             // Empty list
@@ -296,8 +296,10 @@ namespace UnitTests
             list.RemoveAt(list.Length - 1);
             Assert.AreEqual("[1,2,3]", list.ToString().Replace(" ", ""));
 
-            list.RemoveAt(list.Length);
-            Assert.AreEqual("[1,2,3]", list.ToString().Replace(" ", ""));
+            Assert.ThrowsException<IndexOutOfRangeException>(() =>
+            {
+                list.RemoveAt(list.Length);
+            });
 
 
             Assert.ThrowsException<IndexOutOfRangeException>(() =>
