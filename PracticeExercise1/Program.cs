@@ -6,17 +6,13 @@ namespace PracticeExercise1
     {
         static void Main(string[] args)
         {
-            ArrayList al = new ArrayList();
+            IList list = new ArrayList();
+            for (int i = 0; i < 5; i++)
+            {
+                list.Append(i);
+            }
 
-            al.Append(1);
-            al.Append(2);
-            al.Append(3);
-            al.Append(5);
-            al.Append(8);
-
-            Console.WriteLine(al);
-
-            Console.ReadKey();
+            var reversed = list.Reverse();
         }
     }
 }

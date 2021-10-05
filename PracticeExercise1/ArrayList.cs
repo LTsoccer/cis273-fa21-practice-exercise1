@@ -25,7 +25,7 @@ namespace PracticeExercise1
                 }
                 else
                 {
-                    return -1;
+                    throw new NullReferenceException();
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace PracticeExercise1
                 }
                 else
                 {
-                    return -1;
+                    throw new NullReferenceException();
                 }
             }
         }
@@ -93,25 +93,47 @@ namespace PracticeExercise1
             {
                 Resize();
             }
-
-            ShiftRight(index);
-            array[index] = newValue;
-            count++;
+            if (index >= count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else if (index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else
+            {
+                ShiftRight(index);
+                array[index] = newValue;
+                count++;
+            }
         }
 
         public void Remove(int value)
         {
             int indexOfValue = FirstIndexOf(value);
-            ShiftLeft(indexOfValue);
-            array[indexOfValue] = -1;
-            count--;
+            if (indexOfValue != -1)
+            {
+                ShiftLeft(indexOfValue);
+                count--;
+            }
         }
 
         public void RemoveAt(int index)
         {
-            ShiftLeft(index);
-            array[index] = -1;
-            count--;
+            if (index >= count)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else if (index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else
+            {
+                ShiftLeft(index);
+                count--;
+            }
         }
 
         public int FirstIndexOf(int existingValue)
@@ -161,7 +183,7 @@ namespace PracticeExercise1
                 Resize();
             }
 
-            for (int i = endingIndex + 1; i <= count; i++)
+            for (int i = endingIndex + 1; i < count; i++)
             {
                 array[i - 1] = array[i];
             }
@@ -170,12 +192,19 @@ namespace PracticeExercise1
         public override string ToString()
         {
             string result = "[";
-            for (int i = 0; i < count - 1; i++)
+            if (count == 0)
             {
-                result += array[i] + ", ";
+                result += "]";
             }
+            else
+            {
+                for (int i = 0; i < count - 1; i++)
+                {
+                    result += array[i] + ", ";
+                }
 
-            result += array[count - 1] + "]";
+                result += array[count - 1] + "]";
+            }
             return result;
 
             //return "[" + string.Join(", ", array) + "]";
@@ -192,15 +221,13 @@ namespace PracticeExercise1
         {
             var reversedList = new ArrayList();
                 //new int[count];
-            int holder = count;
-            for (int i = 0; i < count; i++)
+            for (int i = count - 1; i >= 0; i--)
             {
                 if (reversedList.count == reversedList.array.Length)
                 {
                     Array.Resize(ref reversedList.array, reversedList.array.Length * 2);
                 }
-                reversedList.array[holder] = array[i];
-                count--;
+                reversedList.Append(array[i]);
             }
             return reversedList;
         }
