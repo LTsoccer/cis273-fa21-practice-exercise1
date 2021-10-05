@@ -350,6 +350,18 @@ namespace UnitTests
         [TestMethod]
         public void TestReverse()
         {
+
+            IList list = new ArrayList();
+            for (int i = 0; i < 5; i++)
+            {
+                list.Append(i);
+            }
+
+            var reversed = list.Reverse();
+            Assert.AreEqual("[4,3,2,1,0]", reversed.ToString().Replace(" ", ""));
+            Assert.AreEqual("[0,1,2,3,4]", list.ToString().Replace(" ", ""));
+
+            Assert.AreEqual("[0,1,2,3,4]", reversed.Reverse().ToString().Replace(" ", ""));
         }
     }
 
