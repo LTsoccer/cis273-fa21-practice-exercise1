@@ -93,13 +93,17 @@ namespace PracticeExercise1
             {
                 Resize();
             }
-            if (index >= count)
+            if (index > count)
             {
                 throw new IndexOutOfRangeException();
             }
             else if (index < 0)
             {
                 throw new IndexOutOfRangeException();
+            }
+            else if (index == count)
+            {
+                Append(newValue);
             }
             else
             {
