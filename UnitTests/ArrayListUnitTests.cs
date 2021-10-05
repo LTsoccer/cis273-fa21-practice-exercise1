@@ -202,9 +202,11 @@ namespace UnitTests
             Assert.AreEqual("[42,0,1,52,2,3,4]", list.ToString().Replace(" ", ""));
 
             list.InsertAt(62, list.Length-1);
-            Assert.AreEqual("[42,0,1,52,2,3,4,62]", list.ToString().Replace(" ", ""));
+            Assert.AreEqual("[42,0,1,52,2,3,62,4]", list.ToString().Replace(" ", ""));
 
-            
+            list.InsertAt(72, list.Length);
+            Assert.AreEqual("[42,0,1,52,2,3,62,4,72]", list.ToString().Replace(" ", ""));
+
             Assert.ThrowsException<IndexOutOfRangeException>(() =>
             {
                 list.InsertAt(42, 42);
@@ -350,7 +352,6 @@ namespace UnitTests
         [TestMethod]
         public void TestReverse()
         {
-
             IList list = new ArrayList();
             for (int i = 0; i < 5; i++)
             {
